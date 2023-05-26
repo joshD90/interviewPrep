@@ -13,3 +13,9 @@ import { isPalindrome } from "./typescriptProblems/problems/palindrome";
 // console.log(sumOfFibonnaci(50));
 
 console.log(isAnagram("eleven plus two", "twelve plus one"));
+
+const myFunc = (animal1: string, animal2: string, animal3: string) => {
+  return (...args) => args;
+};
+
+console.log(myFunc("cats", "dogs", "snakes"));
