@@ -4,10 +4,12 @@
 class Person {
   protected name: string;
   protected id: string;
+  protected university: University;
 
-  constructor(name: string, id: string) {
+  constructor(name: string, id: string, university: University) {
     this.name = name;
     this.id = id;
+    this.university = university;
   }
   //getters
   public getName() {
@@ -28,9 +30,10 @@ class Person {
 class Instructor extends Person {
   private coursesTaught: Course[];
 
-  constructor(name: string, id: string) {
-    super(name, id);
+  constructor(name: string, id: string, university: University) {
+    super(name, id, university);
     this.coursesTaught = [];
+    university.addInstructors([this]);
   }
   //getters
   public getCoursesTaught(): Course[] {
@@ -45,19 +48,19 @@ class Instructor extends Person {
 
 class Student extends Person {
   private enrolledCourses: Course[];
-  constructor(name: string, id: string) {
-    super(name, id);
+  constructor(name: string, id: string, university: University) {
+    super(name, id, university);
     this.enrolledCourses = [];
+    university.addStudents([this]);
   }
   //getters
   public getEnrolledCourses(): Course[] {
     return this.enrolledCourses;
   }
   //setters
-  public joinCourse(courses: Course[]) {
+  public joinCourses(courses: Course[]) {
     this.enrolledCourses = [...this.enrolledCourses, ...courses];
     courses.forEach((course) => course.addStudents([this]));
-    ucd.addStudents([this]);
   }
 
   public leaveEnrolledCourses(courses: Course[]): void {
@@ -74,9 +77,11 @@ class Course {
   private instructor: Instructor;
   private students: Student[];
 
-  constructor(code: number, name: string) {
+  constructor(code: number, name: string, university: University) {
     this.code = code;
     this.name = name;
+    this.students = [];
+    university.addCourses([this]);
   }
 
   //getters
@@ -120,14 +125,10 @@ class University {
   private students: Student[];
   private instructors: Instructor[];
 
-  constructor(
-    courses: Course[],
-    students: Student[],
-    instructors: Instructor[]
-  ) {
-    this.courses = courses;
-    this.students = students;
-    this.instructors = instructors;
+  constructor() {
+    this.courses = [];
+    this.students = [];
+    this.instructors = [];
   }
 
   //getters
@@ -161,7 +162,7 @@ class University {
   }
   public removeStudents(students: Student[]) {
     const filteredStudents = this.students.filter((student) =>
-      students.some((thisStudent) => thisStudent.getId() !== student.getName())
+      students.some((thisStudent) => thisStudent.getId() !== student.getId())
     );
     this.students = filteredStudents;
   }
@@ -190,22 +191,41 @@ class University {
   }
 }
 
-//students
-const james = new Student("James", "a");
-const simon = new Student("Simon", "b");
+const ucd = new University();
 
-//const instructors
-const drSophie = new Instructor("Sophie", "c");
-const drMarie = new Instructor("Marie", "d");
+//students
+const mary = new Student("Mary", "a", ucd);
+const sally = new Student("Sally", "b", ucd);
+const bridget = new Student("Bridget", "c", ucd);
+const conner = new Student("Conner", "d", ucd);
+const sean = new Student("Sean", "e", ucd);
+const peter = new Student("Peter", "f", ucd);
+
+//instructors
+const drEnid = new Instructor("Enid", "g", ucd);
+const drSarah = new Instructor("Sarah", "h", ucd);
+const drEsther = new Instructor("Esther", "i", ucd);
+const drNathan = new Instructor("Nathan", "j", ucd);
 
 //courses
-const sociology = new Course(123, "Sociology");
-const maths = new Course(555, "Maths");
+const maths = new Course(123, "Maths", ucd);
+const english = new Course(234, "English", ucd);
+const spanish = new Course(345, "Spanish", ucd);
+const latin = new Course(456, "Latin", ucd);
+const business = new Course(678, "Business", ucd);
 
-const ucd = new University(
-  [sociology, maths],
-  [james, simon],
-  [drSophie, drMarie]
-);
+drEnid.setCoursesTaught([maths]);
+drSarah.setCoursesTaught([english]);
+drEsther.setCoursesTaught([spanish, latin]);
+drNathan.setCoursesTaught([business]);
 
-const sarah = new Student("Sarah", "e");
+mary.joinCourses([maths, english, business]);
+sally.joinCourses([spanish, latin]);
+bridget.joinCourses([business, maths]);
+conner.joinCourses([maths, english, spanish]);
+sean.joinCourses([english, business, latin]);
+peter.joinCourses([english, maths, spanish]);
+
+console.log(ucd.getCourseNameList());
+console.log(ucd.getStudentNameList());
+console.log(maths.getStudents());
