@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="theme.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <h1>Theme Example</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quia
+        voluptatibus laboriosam, officiis odio obcaecati illum provident commodi
+        in voluptates adipisci, vitae perspiciatis. Totam cumque quam
+        necessitatibus eveniet, temporibus beatae!
+      </p>
+      <br />
+      <button>Change Theme</button>
+    </div>
+    <script>
+      const root = document.querySelector("html");
+      const themeButton = document.querySelector("button");
+
+      const toggleDark = () => {
+        console.log("clicking button");
+        root.classList.toggle("dark");
+      };
+
+      themeButton.addEventListener("click", toggleDark);
+    </script>
+  </body>
+</html>

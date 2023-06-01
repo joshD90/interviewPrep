@@ -1,0 +1,20 @@
+.body {
+  box-sizing: border-box;
+  position: relative;
+}
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.modal {
+  max-width: 680px;
+  border: 1px solid salmon;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: white;
+}

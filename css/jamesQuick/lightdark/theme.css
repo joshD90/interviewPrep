@@ -1,0 +1,30 @@
+/* so the variable is specific to the area that it is being applied to, aka if we put it in a more embedded class it would only apply to that scope */
+:root {
+  --text-color: #333;
+  --bg-color: #f9f9f9;
+}
+
+.dark {
+  --bg-color: #333;
+  --text-color: #f9f9f9;
+}
+
+* {
+  color: var(--text-color);
+  background-color: var(--bg-color);
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+div {
+  width: 60%;
+  text-align: center;
+}
+button {
+  padding: 0.5rem;
+}
