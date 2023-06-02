@@ -1,9 +1,14 @@
 import { useReducer } from "react";
 import "./cart.css";
 import cartReducer from "./CartReducer";
+import { CartItem } from "./CartReducer";
 
 const Cart = () => {
-  const initialCart = { totalQuantity: 0, totalPrice: 0, items: [] };
+  const initialCart = {
+    totalQuantity: 0,
+    totalPrice: 0,
+    items: new Map<string, CartItem>(),
+  };
   const [cart, dispatch] = useReducer(cartReducer, initialCart);
 
   return (
@@ -35,7 +40,7 @@ const Cart = () => {
       <div className="cart">
         <h2>{cart.totalQuantity} Items are in Your Cart</h2>
         <h2>Total: €{cart.totalPrice}</h2>
-        {cart.items.map((item) => (
+        {[...cart.items.values()].map((item) => (
           <div key={item.id}>
             <h3>Item Name: {item.name}</h3>
             <p>Price: €{item.price}</p>
@@ -68,30 +73,30 @@ const cartItems = [
     id: "item-1",
     name: "Item 1",
     price: 47,
-    quantity: 1,
+    quantity: 0,
   },
   {
     id: "item-2",
     name: "Item 2",
     price: 83,
-    quantity: 1,
+    quantity: 0,
   },
   {
     id: "item-3",
     name: "Item 3",
     price: 12,
-    quantity: 1,
+    quantity: 0,
   },
   {
     id: "item-4",
     name: "Item 4",
     price: 56,
-    quantity: 1,
+    quantity: 0,
   },
   {
     id: "item-5",
     name: "Item 5",
     price: 92,
-    quantity: 1,
+    quantity: 0,
   },
 ];

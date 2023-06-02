@@ -1,11 +1,11 @@
-type CartItem = {
-  id: string;
+export type CartItem = {
   price: number;
   name: string;
   quantity: number;
+  id: string;
 };
 type Cart = {
-  items: CartItem[];
+  items: Map<string, CartItem>;
   totalQuantity: number;
   totalPrice: number;
 };
@@ -16,65 +16,59 @@ type CartAction = {
 };
 
 const cartReducer = (state: Cart, action: CartAction): Cart => {
+  const existingItem = state.items.get(action.payload.id);
+  console.log(JSON.stringify(existingItem));
+
   switch (action.type) {
     case "addCartItem": {
+      let updatedItems;
       //if it is already in the cart
-      if (state.items.find((item) => item.id === action.payload.id)) {
-        const updatedArray = state.items.map((item) => {
-          if (item.id === action.payload.id) {
-            return { ...item, quantity: item.quantity + 1 };
-          } else {
-            return item;
-          }
-        });
-        return {
-          totalQuantity: state.totalQuantity + 1,
-          totalPrice: state.totalPrice + action.payload.price,
-          items: updatedArray,
+      if (existingItem) {
+        const updatedItem = {
+          ...existingItem,
+          quantity: existingItem.quantity + 1,
         };
+        updatedItems = new Map(state.items);
+        updatedItems.set(action.payload.id, updatedItem);
+      } else {
+        updatedItems = new Map(state.items);
+        updatedItems.set(action.payload.id, { ...action.payload, quantity: 1 });
       }
-      const updatedQuantity = state.totalQuantity++;
-      const updatedPrice = state.totalPrice + action.payload.price;
-      const updatedItems = [...state.items, action.payload];
       return {
-        totalQuantity: updatedQuantity,
-        totalPrice: updatedPrice,
         items: updatedItems,
+        totalQuantity: state.totalQuantity + 1,
+        totalPrice: state.totalPrice + action.payload.price,
       };
     }
 
     case "removeCartItem": {
-      //if it isnt in the cart
-      const itemToremove = state.items.find(
-        (item) => item.id === action.payload.id
-      );
-      if (!itemToremove) return state;
-
-      const updatedQuantity = state.totalQuantity--;
-      const updatedPrice = state.totalPrice - action.payload.price;
-
+      //if no item in cart
+      if (!existingItem) return state;
       let updatedItems;
-      if (itemToremove.quantity > 1) {
-        updatedItems = state.items.map((item) => {
-          if (item.id === action.payload.id)
-            return { ...item, quantity: item.quantity - 1 };
-          return item;
-        });
+      if (existingItem.quantity > 1) {
+        const updatedItem = {
+          ...existingItem,
+          quantity: existingItem.quantity - 1,
+        };
+        updatedItems = new Map(state.items);
+        updatedItems.set(action.payload.id, updatedItem);
       } else {
-        updatedItems = state.items.filter(
-          (item) => item.id !== action.payload.id
-        );
+        updatedItems = new Map(state.items);
+        updatedItems.delete(action.payload.id);
       }
-
       return {
-        totalQuantity: updatedQuantity,
-        totalPrice: updatedPrice,
         items: updatedItems,
+        totalQuantity: state.totalQuantity - 1,
+        totalPrice: state.totalPrice - action.payload.price,
       };
     }
 
     case "clearCart": {
-      return { totalQuantity: 0, totalPrice: 0, items: [] };
+      return {
+        totalQuantity: 0,
+        totalPrice: 0,
+        items: new Map<string, CartItem>(),
+      };
     }
   }
 };
