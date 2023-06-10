@@ -5,6 +5,8 @@ import ImageThumbnails from "./components/imageThumbnails/ImageThumbnails";
 import Weather from "./components/weatherApi/Weather";
 import Counter from "./components/reducerCounter/Counter";
 import Cart from "./components/shoppingCart/Cart";
+import FormContainer from "./multiStep/FormContainer";
+import BlogWrapper from "./blogContext/BlogWrapper";
 
 const images = [
   "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Samuel_Beckett_Bridge_At_Sunset_Dublin_Ireland_%2897037639%29_%28cropped%29.jpeg/260px-Samuel_Beckett_Bridge_At_Sunset_Dublin_Ireland_%2897037639%29_%28cropped%29.jpeg",
@@ -15,8 +17,8 @@ const images = [
 
 function App() {
   return (
-    <div>
-      <Cart />
+    <div style={{ width: "100vw" }}>
+      <BlogWrapper />
     </div>
   );
 }
