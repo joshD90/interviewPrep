@@ -1,0 +1,19 @@
+First complete it without an api
+
+we will need a seat object, flight object, passenger object, airport object
+Flights can be of a various different type such as 747 or 737 which will change the layout of seats.
+we will abstract a booking object to operate between these objects.
+useCustom hook to do all get requests
+useReducer to populate flights
+
+seat will have a row and seat number - maybe do this from 1 - number of seats.
+Seats will also have booked or not booked and a possible passenger name attached to it.
+
+Flights will have an airport departures - this will be populated by a method - can i do a custom hook within a class perhaps? I will have to see, perhaps i will have to do it as a dependency injection.
+Flights will have departure airport, landing airport, departure time, landing time, flight duration.
+Extending onto the flight you can vary the number of seats that are available.
+
+Airport will be a collection of departing flights and landing flights and GET methods to populate these.  Need some dependency injection again for this.
+
+
+
