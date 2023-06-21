@@ -1,3 +1,5 @@
+import { Plane } from "./Plane";
+
 export type SeatPosition = {
   row: number;
   crossPosition: string;
@@ -5,43 +7,48 @@ export type SeatPosition = {
 
 class Seat {
   private seatNumber: number;
-  private seatPosition: SeatPosition;
-  private flight: string;
+  private seatPosition: SeatPosition = { row: 0, crossPosition: "a" };
+  private plane: Plane;
 
   constructor(
     seatNumber: number,
-    seatRow: number,
-    crossPosition: string,
-    flight: string
+
+    plane: Plane
   ) {
     //NEED TO CREATE A METHOD TO PROGRAMMATICALLY SET SEAT POSITION DEPENDING ON THE FLIGHT IT IS ON / PLANE SIZE
-    this.seatPosition = { row: seatRow, crossPosition: crossPosition };
-    this.flight = flight;
+
+    this.plane = plane;
     this.seatNumber = seatNumber;
+    this.getSeatPosition();
   }
 
   //getters
   public getSeatPosition() {
     return this.seatPosition;
   }
-  public getFlight() {
-    return this.flight;
+  public getPlane() {
+    return this.plane;
   }
   public getSeatNumber() {
     return this.seatNumber;
   }
 
   //setters
-  public setSeatPosition(row: number, crossPosition: string) {
-    this.seatPosition = { row: row, crossPosition: crossPosition };
-  }
-
-  public setFlight(flight: string) {
-    this.flight = flight;
-  }
 
   public setSeatNumber(seatNumber: number) {
     this.seatNumber = seatNumber;
+  }
+
+  //methods
+  //set seat position based on the type of aircraft it is
+  setSeatPosition() {
+    const seatLetters = ["a", "b", "c", "d", "e", "f", "g", "h", "i"];
+    this.seatPosition.row = Math.floor(
+      this.plane.getNumberOfSeats() / this.plane.getSeatsAcross()
+    );
+    const crossPosition =
+      this.plane.getNumberOfSeats() % this.plane.getSeatsAcross();
+    this.seatPosition.crossPosition = seatLetters[crossPosition];
   }
 }
 

@@ -1,7 +1,9 @@
+import { Plane } from "./Plane";
+
 export type PlaneTypes = "Boeing 747" | "Boeing 737" | "Airbus A300";
 export type Airport = "Dublin" | "London";
 
-export class Flight {
+export class Flight extends Plane {
   private flightName: string;
   private departureAirport: Airport;
   private arrivalAirport: Airport;
@@ -9,12 +11,14 @@ export class Flight {
   private arrivalDateTime: Date;
 
   constructor(
+    typeOfPlane: PlaneTypes,
     flightName: string,
     departureAirport: Airport,
     arrivalAirport: Airport,
     departureDateTime: Date,
     arrivalDateTime: Date
   ) {
+    super(typeOfPlane);
     this.flightName = flightName;
     this.departureAirport = departureAirport;
     this.arrivalAirport = arrivalAirport;

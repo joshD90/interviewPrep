@@ -2,8 +2,8 @@ import { PlaneTypes } from "./Flight";
 
 export class Plane {
   private typeOfPlane: PlaneTypes;
-  private numberOfSeats: number;
-  private seatsAcross: number;
+  private numberOfSeats = 0;
+  private seatsAcross = 0;
 
   constructor(typeOfPlane: PlaneTypes) {
     this.typeOfPlane = typeOfPlane;
@@ -25,7 +25,7 @@ export class Plane {
         this.seatsAcross = 10;
         break;
       default:
-        break;
+        throw Error("You have not used a recognised plane type");
     }
   }
 
