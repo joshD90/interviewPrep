@@ -1,4 +1,5 @@
 import { Plane } from "./Plane";
+import Seat from "./Seats";
 
 export type PlaneTypes = "Boeing 747" | "Boeing 737" | "Airbus A300";
 export type Airport = "Dublin" | "London";
@@ -9,6 +10,7 @@ export class Flight extends Plane {
   private arrivalAirport: Airport;
   private departureDateTime: Date;
   private arrivalDateTime: Date;
+  private seats: Seat[] = [];
 
   constructor(
     typeOfPlane: PlaneTypes,
@@ -24,6 +26,15 @@ export class Flight extends Plane {
     this.arrivalAirport = arrivalAirport;
     this.departureDateTime = departureDateTime;
     this.arrivalDateTime = arrivalDateTime;
+    this.setSeats();
+  }
+
+  //methods
+  private setSeats() {
+    this.seats = Array.from(
+      { length: this.getNumberOfSeats() },
+      (_, index) => new Seat(index, this)
+    );
   }
 
   // Getters
@@ -41,6 +52,10 @@ export class Flight extends Plane {
 
   public getDepartureDateTime(): Date {
     return this.departureDateTime;
+  }
+
+  public getSeats(): Seat[] {
+    return this.seats;
   }
 
   public getArrivalDateTime(): Date {

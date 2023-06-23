@@ -98,4 +98,31 @@ const checkPallindrome = (str: string): boolean => {
   return false;
 };
 
-console.log(checkPallindrome("A man, a plan, a canal: Panam"));
+const findMissingNumber = (numbers: number[]): number | string => {
+  for (let i = 1; i < numbers.length; i++) {
+    if (numbers[i] - numbers[i - 1] > 1) return numbers[i] - 1;
+  }
+  return "There is no missing number";
+};
+
+// const maxProfit = (stockNums: number[]): number => {
+//   let difference = 0;
+
+//   for (let i = 0; i < stockNums.length; i++) {
+//     for (let n = i + 1; n < stockNums.length; n++) {
+//       if (n - i > difference) difference = n - i;
+//     }
+//   }
+//   return difference;
+// };
+
+const reverseStringNew = (myString: string): string => {
+  let newString = "";
+  for (let i = myString.length - 1; i > -1; i--) {
+    console.log(myString[i]);
+    newString += myString[i];
+  }
+  return newString;
+};
+
+console.log(reverseStringNew("Khalid"));
