@@ -1,0 +1,19 @@
+.seatingPlan {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(6, 1fr);
+  width: 60%;
+}
+
+.seatDiv {
+  display: flex;
+  border: 1px solid white;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.seatDiv:hover {
+  background-color: #444;
+}

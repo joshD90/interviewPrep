@@ -11,6 +11,7 @@ export class Flight extends Plane {
   private departureDateTime: Date;
   private arrivalDateTime: Date;
   private seats: Seat[] = [];
+  private cost: number;
 
   constructor(
     typeOfPlane: PlaneTypes,
@@ -18,7 +19,8 @@ export class Flight extends Plane {
     departureAirport: Airport,
     arrivalAirport: Airport,
     departureDateTime: Date,
-    arrivalDateTime: Date
+    arrivalDateTime: Date,
+    cost: number
   ) {
     super(typeOfPlane);
     this.flightName = flightName;
@@ -27,6 +29,7 @@ export class Flight extends Plane {
     this.departureDateTime = departureDateTime;
     this.arrivalDateTime = arrivalDateTime;
     this.setSeats();
+    this.cost = cost;
   }
 
   //methods
@@ -62,6 +65,14 @@ export class Flight extends Plane {
     return this.arrivalDateTime;
   }
 
+  public getCost(): number {
+    return this.cost;
+  }
+
+  public getCostToDecimal(): string {
+    return this.cost.toFixed(2);
+  }
+
   // Setters
   public setFlightName(flightName: string): void {
     this.flightName = flightName;
@@ -81,5 +92,9 @@ export class Flight extends Plane {
 
   public setArrivalDateTime(arrivalDateTime: Date): void {
     this.arrivalDateTime = arrivalDateTime;
+  }
+
+  public setCost(cost: number): void {
+    this.cost = cost;
   }
 }

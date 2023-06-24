@@ -1,0 +1,43 @@
+/* .flightContainer {
+  width: 100%;
+} */
+
+.flightDetailsContainer {
+  display: flex;
+  border: 1px solid white;
+  width: 100%;
+  background-color: #333;
+  align-items: center;
+  gap: 5rem;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.flightDescription {
+  padding: 1rem;
+}
+
+/* flight times section */
+.flightTimesDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.airportDetailsDiv {
+  padding: 1rem;
+}
+
+.arrowDiv hr {
+  border: 1px solid white;
+  width: 8rem;
+}
+
+/* proceed section */
+.proceedDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}

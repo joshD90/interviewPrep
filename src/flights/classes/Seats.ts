@@ -19,7 +19,7 @@ class Seat {
 
     this.plane = plane;
     this.seatNumber = seatNumber;
-    this.getSeatPosition();
+    this.setSeatPosition();
   }
 
   //getters
@@ -44,10 +44,9 @@ class Seat {
   setSeatPosition() {
     const seatLetters = ["a", "b", "c", "d", "e", "f", "g", "h", "i"];
     this.seatPosition.row = Math.floor(
-      this.plane.getNumberOfSeats() / this.plane.getSeatsAcross()
+      this.seatNumber / this.plane.getSeatsAcross()
     );
-    const crossPosition =
-      this.plane.getNumberOfSeats() % this.plane.getSeatsAcross();
+    const crossPosition = this.seatNumber % this.plane.getSeatsAcross();
     this.seatPosition.crossPosition = seatLetters[crossPosition];
   }
 }
