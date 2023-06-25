@@ -7,7 +7,10 @@ type Props = { flight: Flight };
 
 const Seating: FC<Props> = ({ flight }) => {
   return (
-    <div>
+    <div className="seatingContainer">
+      <div className="noseDiv"></div>
+      <div className="leftWing"></div>
+      <div className="rightWing"></div>
       <div
         className="seatingPlan"
         style={{

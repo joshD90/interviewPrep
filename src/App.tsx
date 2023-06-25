@@ -1,8 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Seating from "./flights/components/seating/Seating";
-import { flight123 } from "./flights/flights";
+
 import Flight from "./flights/components/flight/Flight";
+import FlightContainer from "./flights/components/flight/FlightContainer";
+import SeatingContainer from "./flights/components/seating/SeatingContainer";
+import SelectPassenger from "./flights/components/passenger/SelectPassenger";
+
+//import context provider
+import { PassengerContextProvider } from "./flights/context/PassengerContextProvider";
 
 function App() {
   return (
@@ -14,15 +20,15 @@ function App() {
         margin: "3rem",
       }}
     >
-      <Router>
-        <Routes>
-          <Route path="/flight" element={<Flight flight={flight123} />} />
-          <Route
-            path="/flight/seating"
-            element={<Seating flight={flight123} />}
-          />
-        </Routes>
-      </Router>
+      <PassengerContextProvider>
+        <Router>
+          <Routes>
+            <Route path="/flight/:id" element={<FlightContainer />} />
+            <Route path="/flight/:id/seating" element={<SeatingContainer />} />
+            <Route path="/login" element={<SelectPassenger />} />
+          </Routes>
+        </Router>
+      </PassengerContextProvider>
     </div>
   );
 }

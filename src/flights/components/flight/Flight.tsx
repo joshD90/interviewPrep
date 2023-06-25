@@ -1,16 +1,25 @@
-import { FC } from "react";
-import { useNavigate } from "react-router-dom";
+import { FC, useContext } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 import "./flight.css";
 import { Flight as FlightClass } from "../../classes/Flight";
+import { PassengerContext } from "../../context/PassengerContextProvider";
 
 type Props = { flight: FlightClass };
 
 const Flight: FC<Props> = ({ flight }) => {
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  const passengerContext = useContext(PassengerContext);
+  if (!passengerContext) return <></>;
+
+  const { currentPassenger } = passengerContext;
+  console.log(currentPassenger, "CURRENT PASSENGER IN FLIGHT");
 
   return (
     <div className="flightContainer">
+      <h1>{currentPassenger?.getFirstName()}</h1>
       <div className="flightDetailsContainer">
         <div className="flightDescription">
           <h3>Flight: {flight.getFlightName()}</h3>
@@ -34,7 +43,7 @@ const Flight: FC<Props> = ({ flight }) => {
         </div>
         <div className="proceedDiv">
           <h4>€{flight.getCostToDecimal()}</h4>
-          <button onClick={() => navigate("/flight/seating")}>
+          <button onClick={() => navigate(`/flight/${id}/seating`)}>
             Proceed To Seats
           </button>
         </div>
