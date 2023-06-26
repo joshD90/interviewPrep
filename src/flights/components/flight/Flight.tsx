@@ -5,17 +5,15 @@ import "./flight.css";
 import { Flight as FlightClass } from "../../classes/Flight";
 import { PassengerContext } from "../../context/PassengerContextProvider";
 
-type Props = { flight: FlightClass };
+type Props = { flight: FlightClass; flightIndex: string | null };
 
-const Flight: FC<Props> = ({ flight }) => {
+const Flight: FC<Props> = ({ flight, flightIndex }) => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const passengerContext = useContext(PassengerContext);
-  if (!passengerContext) return <></>;
-
-  const { currentPassenger } = passengerContext;
-  console.log(currentPassenger, "CURRENT PASSENGER IN FLIGHT");
+  const { currentPassenger, setCurrentPassenger } =
+    useContext(PassengerContext);
+  console.log(flight, "flight");
 
   return (
     <div className="flightContainer">
@@ -43,7 +41,11 @@ const Flight: FC<Props> = ({ flight }) => {
         </div>
         <div className="proceedDiv">
           <h4>€{flight.getCostToDecimal()}</h4>
-          <button onClick={() => navigate(`/flight/${id}/seating`)}>
+          <button
+            onClick={() =>
+              navigate(`/flight/${flightIndex ? flightIndex : id}/seating`)
+            }
+          >
             Proceed To Seats
           </button>
         </div>

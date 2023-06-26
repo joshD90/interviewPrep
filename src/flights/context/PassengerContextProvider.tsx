@@ -7,8 +7,12 @@ type PassengerContextType = {
   setCurrentPassenger: (passenger: null | Passenger) => void;
 };
 
-export const PassengerContext =
-  React.createContext<PassengerContextType | null>(null);
+export const PassengerContext = React.createContext<PassengerContextType>({
+  currentPassenger: null,
+  setCurrentPassenger: () => {
+    ("");
+  },
+});
 
 export const PassengerContextProvider: FC<Props> = ({ children }) => {
   const [currentPassenger, setCurrentPassenger] = useState<null | Passenger>(

@@ -1,12 +1,16 @@
+import { Flight } from "./Flight";
+
 export class Passenger {
   private firstName: string;
   private secondName: string;
   private age: number;
+  private flights: Flight[];
 
   constructor(firstName: string, secondName: string, age: number) {
     this.firstName = firstName;
     this.secondName = secondName;
     this.age = age;
+    this.flights = [];
   }
 
   // Getter for firstName
@@ -37,5 +41,19 @@ export class Passenger {
   // Setter for age
   setAge(newAge: number) {
     this.age = newAge;
+  }
+
+  //flights methods
+  public getFlights(): Flight[] {
+    return this.flights;
+  }
+
+  public addFlight(flight: Flight): void {
+    this.flights = [...this.flights, flight];
+  }
+  public removeFlight(flightToRemove: Flight): void {
+    this.flights = this.flights.filter(
+      (flight) => flight.getFlightName() !== flightToRemove.getFlightName()
+    );
   }
 }

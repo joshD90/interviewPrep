@@ -9,6 +9,7 @@ import SelectPassenger from "./flights/components/passenger/SelectPassenger";
 
 //import context provider
 import { PassengerContextProvider } from "./flights/context/PassengerContextProvider";
+import AllFlights from "./flights/components/flight/AllFlights";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <PassengerContextProvider>
         <Router>
           <Routes>
+            <Route path="/flight" element={<AllFlights />} />
             <Route path="/flight/:id" element={<FlightContainer />} />
             <Route path="/flight/:id/seating" element={<SeatingContainer />} />
             <Route path="/login" element={<SelectPassenger />} />

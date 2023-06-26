@@ -16,7 +16,6 @@ const SelectPassenger = () => {
     setCurrentPassenger(
       allPassengers[e.target.value.split(" ")[0].toLowerCase()]
     );
-    console.log(e.target.value);
   };
 
   return (
@@ -31,7 +30,7 @@ const SelectPassenger = () => {
           >
             {Object.values(allPassengers).map((passenger) => {
               return (
-                <option>
+                <option key={passenger.getFirstName()}>
                   {passenger.getFirstName() + " " + passenger.getSecondName()}
                 </option>
               );

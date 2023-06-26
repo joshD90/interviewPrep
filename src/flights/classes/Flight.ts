@@ -1,3 +1,4 @@
+import { Passenger } from "./Passenger";
 import { Plane } from "./Plane";
 import Seat from "./Seats";
 
@@ -12,6 +13,7 @@ export class Flight extends Plane {
   private arrivalDateTime: Date;
   private seats: Seat[] = [];
   private cost: number;
+  private passengers: Passenger[];
 
   constructor(
     typeOfPlane: PlaneTypes,
@@ -30,6 +32,7 @@ export class Flight extends Plane {
     this.arrivalDateTime = arrivalDateTime;
     this.setSeats();
     this.cost = cost;
+    this.passengers = [];
   }
 
   //methods
@@ -96,5 +99,21 @@ export class Flight extends Plane {
 
   public setCost(cost: number): void {
     this.cost = cost;
+  }
+
+  //passenger methods
+  public getPassengers(): Passenger[] {
+    return this.passengers;
+  }
+  public addPassenger(passenger: Passenger): void {
+    this.passengers = [...this.passengers, passenger];
+  }
+
+  public removePassenger(passengerToRemove: Passenger): void {
+    this.passengers = this.passengers.filter(
+      (passenger) =>
+        passenger.getFirstName() !== passengerToRemove.getFirstName() &&
+        passenger.getSecondName() !== passengerToRemove.getSecondName()
+    );
   }
 }

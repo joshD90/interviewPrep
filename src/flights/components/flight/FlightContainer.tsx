@@ -4,9 +4,8 @@ import flights from "../../flights";
 
 const FlightContainer = () => {
   const { id } = useParams();
-  console.log(id);
 
-  return <>{id && <Flight flight={flights[id]} />}</>;
+  return <>{id && <Flight flight={flights[id]} flightIndex={null} />}</>;
 };
 
 export default FlightContainer;
