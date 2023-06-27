@@ -7,6 +7,8 @@ export class BookingManager {
     if (seat.getPassenger() !== null)
       throw Error("Cannot book two people into the one seat");
     passenger.addFlight(flight);
+    const allocatedSeat = flight.findPassengerSeat(passenger);
+    allocatedSeat?.removePassenger();
     flight.addPassenger(passenger);
     seat.addPassenger(passenger);
   }

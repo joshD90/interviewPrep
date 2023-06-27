@@ -4,12 +4,13 @@ import "./seating.css";
 import { Flight } from "../../classes/Flight";
 import { BookingManager } from "../../classes/Booking";
 import { PassengerContext } from "../../context/PassengerContextProvider";
+import Seat from "../../classes/Seats";
 
 type Props = { flight: Flight };
 
 const Seating: FC<Props> = ({ flight }) => {
   const { currentPassenger } = useContext(PassengerContext);
-  const [stateFlight] = useState<Flight>(flight);
+  const [stateSeats, setStateSeats] = useState(flight.getSeats());
 
   if (!currentPassenger) return <></>;
   return (
@@ -20,10 +21,10 @@ const Seating: FC<Props> = ({ flight }) => {
       <div
         className="seatingPlan"
         style={{
-          gridTemplateColumns: `repeat(${stateFlight.getSeatsAcross()},1fr)`,
+          gridTemplateColumns: `repeat(${flight.getSeatsAcross()},1fr)`,
         }}
       >
-        {stateFlight.getSeats().map((seat) => {
+        {stateSeats.map((seat) => {
           return (
             <div
               className="seatDiv"
@@ -36,7 +37,7 @@ const Seating: FC<Props> = ({ flight }) => {
               }}
               onClick={() => {
                 BookingManager.bookOntoFlight(currentPassenger, flight, seat);
-                console.log("booked");
+                setStateSeats([...flight.getSeats()]);
               }}
             >
               <p>{seat.getSeatPosition().row}</p>

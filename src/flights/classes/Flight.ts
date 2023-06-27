@@ -116,4 +116,12 @@ export class Flight extends Plane {
         passenger.getSecondName() !== passengerToRemove.getSecondName()
     );
   }
+  public findPassengerSeat(passenger: Passenger): Seat | undefined {
+    const seatAllocation = this.seats.find(
+      (seat) =>
+        seat.getPassenger()?.getFirstName() === passenger.getFirstName() &&
+        seat.getPassenger()?.getSecondName() === passenger.getSecondName()
+    );
+    return seatAllocation;
+  }
 }
