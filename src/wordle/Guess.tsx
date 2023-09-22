@@ -17,7 +17,7 @@ const Guess: FC<Props> = ({ guess }) => {
       case GuessCharStatus.INCORRECT:
         return "red";
       case GuessCharStatus.WRONGPOS:
-        return "yellow";
+        return "rgb(154, 90, 1)";
     }
   };
 
@@ -38,11 +38,14 @@ const Guess: FC<Props> = ({ guess }) => {
             height: "20px",
             width: "20px",
             margin: "10px, 5px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
             backgroundColor: determineBackgroundColor(guess[index].guessStatus),
           }}
           key={index}
         >
-          {guess[index].guessChar}
+          {guess[index].guessChar.toUpperCase()}
         </span>
       ))}
     </div>
