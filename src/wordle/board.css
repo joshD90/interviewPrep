@@ -5,6 +5,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  position: relative;
 }
 
 .guess-table {
@@ -26,4 +27,15 @@
   height: 2rem;
   border-radius: 5px;
   font-size: 1.2rem;
+}
+.unused-letters {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translate(-50%, 100%);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 1.6rem;
+  justify-content: center;
 }

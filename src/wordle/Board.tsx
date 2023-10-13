@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Guess from "./Guess";
-import fiveLetterWords from "./5letterWords";
+import fiveLetterWords, { lowercaseAlphabet } from "./5letterWords";
 import "./board.css";
 
 export enum GuessCharStatus {
@@ -24,10 +24,13 @@ const Board = () => {
   const [round, setRound] = useState(0);
   const [wordToGuess, setWordToGuess] = useState("");
   const [endGameMessage, setEndgameMessage] = useState("");
+  const [unusedLetters, setUnusedLetters] =
+    useState<string[]>(lowercaseAlphabet);
 
   useEffect(() => {
-    const randomNumber = Math.floor(Math.random() * fiveLetterWords.length) - 1;
-    setWordToGuess(fiveLetterWords[randomNumber]);
+    // const randomNumber = Math.floor(Math.random() * fiveLetterWords.length) - 1;
+    // setWordToGuess(fiveLetterWords[randomNumber]);
+    setWordToGuess("nanny");
   }, []);
 
   const handleGuessChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,15 +58,12 @@ const Board = () => {
   const checkGuess = (e: React.FormEvent) => {
     e.preventDefault();
     if (getGuessString(guesses[round]).length !== 5) return;
-    if (getGuessString(guesses[round]) === wordToGuess) {
-      setEndgameMessage(`YOU WON YOU LEGEND`);
-      return;
-    }
+
     setGuesses((prev) => {
       return prev.map((guess, index) => {
         if (index !== round) return guess;
         const updatedGuess = [...guess];
-
+        const alreadyOccurringLetters: string[] = [];
         for (let i = 0; i < 5; i++) {
           const currentChar = updatedGuess[i].guessChar;
           if (currentChar === wordToGuess[i]) {
@@ -72,15 +72,35 @@ const Board = () => {
           }
 
           if (wordToGuess.includes(currentChar)) {
+            if (alreadyOccurringLetters.includes(currentChar)) {
+              updatedGuess[i].guessStatus = GuessCharStatus.INCORRECT;
+              continue;
+            }
             updatedGuess[i].guessStatus = GuessCharStatus.WRONGPOS;
+            alreadyOccurringLetters.push(currentChar);
             continue;
           }
 
           updatedGuess[i].guessStatus = GuessCharStatus.INCORRECT;
+          alreadyOccurringLetters.push(currentChar);
         }
         return updatedGuess;
       });
     });
+
+    if (getGuessString(guesses[round]) === wordToGuess) {
+      setEndgameMessage(`YOU WON YOU LEGEND`);
+      return;
+    }
+    setUnusedLetters((prev) =>
+      prev.map((letter) => {
+        if (getGuessString(guesses[round]).includes(letter)) {
+          return "";
+        } else {
+          return letter;
+        }
+      })
+    );
     if (round === 5) {
       setEndgameMessage(
         `You have lost, The Word Was ${wordToGuess.toUpperCase()}`
@@ -99,7 +119,7 @@ const Board = () => {
 
   return (
     <section className="board">
-      <h2>Word Of the Day</h2>
+      <h2>{wordToGuess}</h2>
 
       <div className="guess-table">
         {guesses.map((_guess, index) => (
@@ -118,6 +138,11 @@ const Board = () => {
         <button>Submit Guess</button>
       </form>
       {endGameMessage !== "" && <h3>{endGameMessage}</h3>}
+      <div className="unused-letters">
+        {unusedLetters.map((letter) => (
+          <span>{letter}</span>
+        ))}
+      </div>
     </section>
   );
 };
