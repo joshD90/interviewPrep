@@ -1,5 +1,5 @@
 export const fetchData = async (urls: string[]): Promise<string[]> => {
-  try {
+
     const fetchPromises = await Promise.all(urls.map((url) => fetch(url)));
     const resultsPromises = await Promise.all(
       fetchPromises.map((result) => {
@@ -8,7 +8,5 @@ export const fetchData = async (urls: string[]): Promise<string[]> => {
       })
     );
     return resultsPromises;
-  } catch (error) {
-    throw error as Error;
-  }
+
 };
