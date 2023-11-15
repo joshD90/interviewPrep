@@ -38,3 +38,39 @@ debouncedCall();
 debouncedCall();
 debouncedCall();
 debouncedCall();
+
+const throttle = (fn: (args: any[]) => any, delay) => {
+  let lastTime: number | undefined;
+
+  return (...args) => {
+    if (!lastTime || Date.now() - lastTime >= delay) {
+      fn([...args]);
+      lastTime = Date.now();
+    }
+  };
+};
+
+const myConsole = () => {
+  console.log(
+    "Should only on the first on the first one because of throttling"
+  );
+};
+
+const throttledConsole = throttle(myConsole, 10);
+
+throttledConsole();
+throttledConsole();
+throttledConsole();
+
+const memoize = (fn: (...args: any[]) => any) => {
+  const store = new Map<string, any>();
+
+  return (...args) => {
+    const key = JSON.stringify(args);
+    const existingEntry = store.get(key);
+
+    if (existingEntry) return existingEntry;
+
+    store.set(key, fn(...args));
+  };
+};
