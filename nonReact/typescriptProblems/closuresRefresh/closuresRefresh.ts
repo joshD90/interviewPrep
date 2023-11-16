@@ -74,3 +74,17 @@ const memoize = (fn: (...args: any[]) => any) => {
     store.set(key, fn(...args));
   };
 };
+
+const secondMemo = (fn: (args: any[]) => any) => {
+  const store = new Map<string, any>();
+
+  return (...args) => {
+    const key = JSON.stringify(args);
+    let memoValue = store.get(key);
+    if (!memoValue) {
+      memoValue = fn(args);
+      store.set(key, memoValue);
+    }
+    return memoValue;
+  };
+};
