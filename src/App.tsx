@@ -11,6 +11,7 @@ import SelectPassenger from "./flights/components/passenger/SelectPassenger";
 import { PassengerContextProvider } from "./flights/context/PassengerContextProvider";
 import AllFlights from "./flights/components/flight/AllFlights";
 import Board from "./wordle/Board";
+import CallingContainer from "./useReducerPractice/CallingContainer";
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
         margin: "3rem",
       }}
     >
-      <Board />
+      <CallingContainer />
     </div>
     // <div
     //   style={{
