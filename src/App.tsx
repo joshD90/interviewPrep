@@ -12,8 +12,14 @@ import { PassengerContextProvider } from "./flights/context/PassengerContextProv
 import AllFlights from "./flights/components/flight/AllFlights";
 import Board from "./wordle/Board";
 import CallingContainer from "./useReducerPractice/CallingContainer";
+import { ThemeContextProvider } from "./useContextPractice/LightThemeContext";
+import { LanguageContextProvider } from "./useContextPractice/LanguageContext";
+import { createContext, useState } from "react";
 
 function App() {
+  const [color, setColor] = useState("blue");
+  const ColorContext = createContext({ color, setColor });
+
   return (
     <div
       style={{
@@ -23,7 +29,13 @@ function App() {
         margin: "3rem",
       }}
     >
-      <CallingContainer />
+      <ThemeContextProvider>
+        <LanguageContextProvider>
+          <ColorContext.Provider value={{ color, setColor }}>
+            <CallingContainer />
+          </ColorContext.Provider>
+        </LanguageContextProvider>
+      </ThemeContextProvider>
     </div>
     // <div
     //   style={{
