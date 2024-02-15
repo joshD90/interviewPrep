@@ -15,6 +15,7 @@ import CallingContainer from "./useReducerPractice/CallingContainer";
 import { ThemeContextProvider } from "./useContextPractice/LightThemeContext";
 import { LanguageContextProvider } from "./useContextPractice/LanguageContext";
 import { createContext, useState } from "react";
+import BasicText from "./cypressTestComponents/basicText";
 
 function App() {
   const [color, setColor] = useState("blue");
@@ -32,7 +33,7 @@ function App() {
       <ThemeContextProvider>
         <LanguageContextProvider>
           <ColorContext.Provider value={{ color, setColor }}>
-            <CallingContainer />
+            <BasicText />
           </ColorContext.Provider>
         </LanguageContextProvider>
       </ThemeContextProvider>
