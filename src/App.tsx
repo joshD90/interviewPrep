@@ -16,6 +16,7 @@ import { ThemeContextProvider } from "./useContextPractice/LightThemeContext";
 import { LanguageContextProvider } from "./useContextPractice/LanguageContext";
 import { createContext, useState } from "react";
 import BasicText from "./cypressTestComponents/basicText";
+import { ProductsContainer } from "./filterProductsList/ProductsContainer";
 
 function App() {
   const [color, setColor] = useState("blue");
@@ -33,7 +34,7 @@ function App() {
       <ThemeContextProvider>
         <LanguageContextProvider>
           <ColorContext.Provider value={{ color, setColor }}>
-            <BasicText />
+            <ProductsContainer />
           </ColorContext.Provider>
         </LanguageContextProvider>
       </ThemeContextProvider>
