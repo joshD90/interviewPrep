@@ -17,6 +17,10 @@ import { LanguageContextProvider } from "./useContextPractice/LanguageContext";
 import { createContext, useState } from "react";
 import BasicText from "./cypressTestComponents/basicText";
 import { ProductsContainer } from "./filterProductsList/ProductsContainer";
+import { CartCaller } from "./contextPractice/CartCaller";
+import { CartContextProvider } from "./contextPractice/CartContext";
+import DynamicFormContainer from "./dynamicForm/DynamicFormContainer";
+import { testFormdata } from "./dynamicForm/testFormData";
 
 function App() {
   const [color, setColor] = useState("blue");
@@ -28,13 +32,14 @@ function App() {
         width: "100vw",
         display: "flex",
         justifyContent: "center",
-        margin: "3rem",
       }}
     >
       <ThemeContextProvider>
         <LanguageContextProvider>
           <ColorContext.Provider value={{ color, setColor }}>
-            <ProductsContainer />
+            <CartContextProvider>
+              <DynamicFormContainer formObj={testFormdata} cols={2} />
+            </CartContextProvider>
           </ColorContext.Provider>
         </LanguageContextProvider>
       </ThemeContextProvider>

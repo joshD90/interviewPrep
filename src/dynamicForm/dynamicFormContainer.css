@@ -1,0 +1,26 @@
+.form-container {
+  height: 100vh;
+  width: 100vw;
+  background-color: green;
+  margin: 0;
+  padding: 0;
+  background-color: rgb(2, 2, 57);
+}
+.dynamic-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.dynamic-input {
+  display: flex;
+  flex-direction: column;
+  padding: 0.3rem;
+}
+
+.dynamic-input input {
+  background-color: white;
+  border: none;
+  padding: 0.5rem;
+  font-size: 1.3rem;
+  color: black;
+}
