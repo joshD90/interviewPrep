@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { FormObj, Option } from "./dynamicFormTypes";
+import { FormObj } from "./dynamicFormTypes";
 
 import "./dynamicFormContainer.css";
 import { mapFormObj } from "./utis";
@@ -7,8 +7,8 @@ import { FormItem } from "./FormItem";
 
 type Props = { formObj: FormObj; cols?: number };
 
-const DynamicFormContainer: FC<Props> = ({ formObj, cols }) => {
-  const [formState, setFormState] = useState(() => mapFormObj(formObj));
+const DynamicFormContainer: FC<Props> = ({ formObj }) => {
+  const [formState] = useState(() => mapFormObj(formObj));
 
   return (
     <section className="form-container">

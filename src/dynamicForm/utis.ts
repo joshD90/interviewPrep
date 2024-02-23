@@ -5,7 +5,7 @@ export const mapFormObj = (formObj: FormObj): MappedFormObj[] => {
   const mappedEntries = formEntries.map((entry) => {
     const id = entry[0];
     const restOfValues = entry[1];
-    let options: null | Option[] = null;
+    let options: undefined | Option[] = undefined;
     let multiple: undefined | boolean;
     if ("options" in restOfValues) {
       options = restOfValues.options;

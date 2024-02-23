@@ -20,6 +20,6 @@ export type MappedFormObj = {
   id: string;
   label: string;
   type: "number" | "text" | "password" | "email" | "select";
-  options: Option[] | null;
+  options?: Option[];
   multiple?: boolean;
 };

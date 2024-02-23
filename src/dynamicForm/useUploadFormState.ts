@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const useUploadForm = () => {
+export const useSetForm = () => {
   const [formState, setFormState] = useState<{
     [key: string]: string | number | (string | number)[] | boolean;
   }>({});
