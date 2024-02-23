@@ -6,6 +6,7 @@ export interface InputBase {
 export interface SelectInput extends InputBase {
   type: "select";
   options: Option[];
+  multiple?: boolean;
 }
 
 export type Option = {
@@ -14,3 +15,11 @@ export type Option = {
 };
 
 export type FormObj = { [key: string]: InputBase | SelectInput };
+
+export type MappedFormObj = {
+  id: string;
+  label: string;
+  type: "number" | "text" | "password" | "email" | "select";
+  options: Option[] | null;
+  multiple?: boolean;
+};
